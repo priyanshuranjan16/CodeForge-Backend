@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Use Pool instead of Client for better connection management
 const pool = new Pool({
     connectionString: process.env.DATABASE_POOL_URL,
     // Connection pool settings
@@ -27,7 +26,6 @@ const connectDB = async () => {
         client.release(); // Release back to pool
     } catch (error) {
         console.error("Database connection error:", error);
-        // Retry connection after delay
         setTimeout(connectDB, 5000);
     }
 }
